@@ -1,0 +1,59 @@
+{% extends 'social/base.html' %}
+
+
+{% block conteudo %}
+
+
+<!-- Formulário de nova postagem -->
+<div class="form-postagem">
+    <form method="POST" >
+        {% csrf_token %}
+        {{ form }}
+        <!-- Campo para o título da postagem -->
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="titulo" name="titulo" placeholder="Digite o título aqui" required><br><br>
+
+  <!-- Campo para o conteúdo da postagem -->
+        <label for="conteudo">Conteúdo:</label><br>
+        <textarea id="conteudo" name="conteudo" rows="6" cols="40" placeholder="Digite o conteúdo aqui" required></textarea><br><br>
+
+
+        <button type="submit">Publicar</button>
+    </form>
+</div>
+
+<!-- Feed de postagens -->
+<h2>Feed</h2>
+{% for nova_postagem in nova_postagens %}
+    <div class="postagem">
+        <strong>{{ postagem.usuario.username }}</strong> - {{ postagem.data_postagem|date:"d/m/Y H:i" }}
+        <p>{{ postagem.texto }}</p>
+
+        <div class="botoes">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="postagem_id" value="{{ postagem.id }}">
+                <input type="hidden" name="action" value="curtir">
+                <button type="submit">👍 {{ postagem.curtidas }}</button>
+            </form>
+
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="postagem_id" value="{{ postagem.id }}">
+                <input type="hidden" name="action" value="descurtir">
+                <button type="submit">👎 {{ postagem.descurtidas }}</button>
+            </form>
+
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="postagem_id" value="{{ postagem.id }}">
+                <input type="hidden" name="action" value="compartilhar">
+                <button type="submit">🔗 Compartilhar</button>
+            </form>
+        </div>
+    </div>
+{% empty %}
+    <p>Sem postagens.</p>
+{% endfor %}
+
+{% endblock conteudo %}
