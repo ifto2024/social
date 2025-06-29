@@ -117,8 +117,6 @@ USE_TZ = True
 
 # Configurações de arquivos estáticos
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Pasta que o Render usa
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Seus arquivos locais
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
