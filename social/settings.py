@@ -116,17 +116,9 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-# Caminho para a pasta com arquivos estáticos no desenvolvimento
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
-# Caminho onde os arquivos serão coletados para produção
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# URL base para acessar arquivos estáticos
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Default primary key field type
