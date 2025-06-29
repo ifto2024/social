@@ -1,0 +1,58 @@
+{% extends 'social/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <!-- Sistema de Notificação -->
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-3" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="card shadow-sm mb-5">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h5 mb-0">Login</h2>
+                </div>
+                <form method="post" class="card-body">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label for="{{ form.username.id_for_label }}" class="form-label fw-bold">
+                                    Usuário:
+                                </label>
+                                {% render_field form.username class="form-control" id=form.username.id_for_label required="required" %}
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label for="{{ form.password.id_for_label }}" class="form-label fw-bold">
+                                    Senha:
+                                </label>
+                                {% render_field form.password class="form-control" id=form.password.id_for_label required="required" %}
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-between align-items-center">
+
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Entrar
+                            </button>
+                        </div>
+
+                        <div class="col-12 text-center mt-3">
+                            <p class="mb-0">Não tem uma conta? <a href="{% url 'new_usuario' %}" class="text-decoration-none">Cadastre-se</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
